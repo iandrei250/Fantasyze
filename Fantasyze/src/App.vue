@@ -1,18 +1,13 @@
-
 <template>
-  <div>
-    <h2>Heroes</h2>
-    <p v-if="error">{{ error }}</p>
-    <ul v-else>
-      <li v-for="hero in heroes" :key="hero.id">{{ hero.name }}</li>
-    </ul>
-  </div>
+  <Navigation />
+  <HomeView />
 </template>
 
-
 <script setup lang="ts">
-import {ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import HomeView from './views/HomeView.vue'
+import Navigation from './components/Navigation.vue'
 const heroes = ref([])
 const error = ref<string | null>(null)
 onMounted(async () => {
@@ -25,3 +20,4 @@ onMounted(async () => {
 })
 </script>
 
+<style></style>
