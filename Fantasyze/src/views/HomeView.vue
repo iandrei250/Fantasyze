@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { getHeroes } from '@/helpers/api/heroesApiRequests'
 import {
   landingPageDescription,
   landingPage,
@@ -10,14 +11,9 @@ import { Card } from 'primevue'
 import { ref, onMounted } from 'vue'
 
 const heroes = ref<Hero[]>([])
-const error = ref<string | null>(null)
+
 onMounted(async () => {
-  try {
-    const response = await axios.get('http://localhost:5162/api/heroes')
-    heroes.value = response.data
-  } catch (err) {
-    error.value = 'Failed to fetch heroes: ' + (err as Error).message
-  }
+  heroes.value = await getHeroes()
 })
 </script>
 
