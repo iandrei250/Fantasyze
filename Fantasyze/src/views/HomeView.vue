@@ -4,6 +4,21 @@ import {
   landingPage,
   landingPageSubText,
 } from '@/helpers/constants/constants'
+import type { Hero } from '@/helpers/interfaces/heroes'
+import axios from 'axios'
+import { Card } from 'primevue'
+import { ref, onMounted } from 'vue'
+
+const heroes = ref<Hero[]>([])
+const error = ref<string | null>(null)
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:5162/api/heroes')
+    heroes.value = response.data
+  } catch (err) {
+    error.value = 'Failed to fetch heroes: ' + (err as Error).message
+  }
+})
 </script>
 
 <template>
@@ -17,6 +32,14 @@ import {
     <h3 class="text-md font-regular text-pretty sm:text-xl/8 text-center">
       {{ landingPageSubText }}
     </h3>
+  </div>
+  <div class="py-2" v-for="hero in heroes">
+    <div :key="hero.id" class="w-full p-8 bg-linear-to-r from-gray-800 to-black-900">
+      <div>
+        <h1>{{ hero.name }}</h1>
+        <p>{{ hero.description }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
