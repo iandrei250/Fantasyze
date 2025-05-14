@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { appName } from '@/helpers/constants/constants'
+import { appName, createHeroButtonText } from '@/helpers/constants/constants'
+import { Button } from 'primevue'
 </script>
 
 <template>
   <nav class="bg-gray-800">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden"></div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -21,6 +22,7 @@ import { appName } from '@/helpers/constants/constants'
             </div>
           </div>
         </div>
+        <Button as="a" class="margin-auto" :label="createHeroButtonText" href="/create" />
       </div>
     </div>
   </nav>

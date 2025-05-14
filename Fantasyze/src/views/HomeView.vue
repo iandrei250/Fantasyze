@@ -6,8 +6,6 @@ import {
   landingPageSubText,
 } from '@/helpers/constants/constants'
 import type { Hero } from '@/helpers/interfaces/heroes'
-import axios from 'axios'
-import { Card } from 'primevue'
 import { ref, onMounted } from 'vue'
 
 const heroes = ref<Hero[]>([])
