@@ -9,3 +9,11 @@ export const getHeroes: () => Promise<Hero[]> = async () => {
     throw 'Failed to fetch heroes: ' + (err as Error).message
   }
 }
+
+export const createHero = async (hero: Hero) => {
+  try {
+    const response = await axios.post('http://localhost:5162/api/heroes', hero)
+  } catch (err) {
+    throw 'Failed to fetch heroes: ' + (err as Error).message
+  }
+}

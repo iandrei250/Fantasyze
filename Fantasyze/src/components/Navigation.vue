@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { appName, createHeroButtonText } from '@/helpers/constants/constants'
 import { Button } from 'primevue'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -22,7 +23,11 @@ import { Button } from 'primevue'
             </div>
           </div>
         </div>
-        <Button as="a" class="margin-auto" :label="createHeroButtonText" href="/create" />
+        <Button class="margin-auto">
+          <RouterLink to="/create">
+            {{ createHeroButtonText }}
+          </RouterLink>
+        </Button>
       </div>
     </div>
   </nav>
