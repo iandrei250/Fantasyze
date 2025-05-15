@@ -10,9 +10,13 @@ export const getHeroes: () => Promise<Hero[]> = async () => {
   }
 }
 
-export const createHero = async (hero: Hero) => {
+export const createHero = async (hero: FormData) => {
   try {
-    const response = await axios.post('http://localhost:5162/api/heroes', hero)
+    const response = await axios.post('http://localhost:5162/api/heroes', hero, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
   } catch (err) {
     throw 'Failed to fetch heroes: ' + (err as Error).message
   }

@@ -91,16 +91,16 @@ export default {
       if (target.files && target.files.length > 0) {
         this.hero.image = target.files[0]
       }
-
-      console.log(this.hero.image)
     },
 
     submitForm() {
-      createHero({
-        name: this.hero.name,
-        description: this.hero.description,
-        image: this.hero.image,
-      })
+      const formData = new FormData()
+      formData.append('name', this.hero.name)
+      formData.append('description', this.hero.description)
+      if (this.hero.image) {
+        formData.append('image', this.hero.image)
+      }
+      createHero(formData)
     },
   },
 }
