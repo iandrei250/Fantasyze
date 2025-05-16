@@ -32,9 +32,8 @@ onMounted(async () => {
       <div>
         <h1>{{ hero.name }}</h1>
         <p>{{ hero.description }}</p>
+        <img v-if="hero.image" :src="`data:image/png;base64,${hero.image}`" alt="" />
       </div>
     </div>
   </div>
 </template>
-
-<style scoped></style>
