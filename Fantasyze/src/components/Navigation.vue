@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { appName, createHeroButtonText } from '@/helpers/constants/constants'
+import router from '@/router'
 import { Button } from 'primevue'
 import { RouterLink } from 'vue-router'
 </script>
@@ -23,7 +24,7 @@ import { RouterLink } from 'vue-router'
             </div>
           </div>
         </div>
-        <Button class="margin-auto">
+        <Button v-if="router.currentRoute.value.path !== `/create`" class="margin-auto">
           <RouterLink to="/create">
             {{ createHeroButtonText }}
           </RouterLink>
