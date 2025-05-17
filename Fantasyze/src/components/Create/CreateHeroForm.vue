@@ -63,45 +63,47 @@
       </label>
     </div>
     <div
+      v-if="!isLoading"
       class="margin-auto border-2 border-solid p-2 rounded-md bg-white text-black w-fit cursor-pointer hover:bg-gray-200"
       @click="submitForm()"
     >
       Create Character
     </div>
+    <div v-else="isLoading">
+      <Loader />
+    </div>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { createHero } from '@/helpers/api/heroesApiRequests'
+import { ref } from 'vue'
+import Loader from '../Shared/Loader.vue'
 
-export default {
-  data() {
-    return {
-      hero: {
-        name: '',
-        description: '',
-        image: null as File | null,
-      },
-    }
-  },
+const isLoading = ref<boolean>(false)
+const hero = ref({
+  name: '',
+  description: '',
+  image: null as File | null,
+})
 
-  methods: {
-    handleFileUpload(event: Event) {
-      const target = event.target as HTMLInputElement
-      if (target.files && target.files.length > 0) {
-        this.hero.image = target.files[0]
-      }
-    },
+function handleFileUpload(event: Event) {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files.length > 0) {
+    hero.value.image = target.files[0]
+  }
+}
 
-    submitForm() {
-      const formData = new FormData()
-      formData.append('name', this.hero.name)
-      formData.append('description', this.hero.description)
-      if (this.hero.image) {
-        formData.append('image', this.hero.image)
-      }
-      createHero(formData)
-    },
-  },
+function submitForm() {
+  isLoading.value = true
+  const formData = new FormData()
+  formData.append('name', hero.value.name)
+  formData.append('description', hero.value.description)
+  if (hero.value.image) {
+    formData.append('image', hero.value.image)
+  }
+  createHero(formData).then(() => {
+    isLoading.value = false
+  })
 }
 </script>
