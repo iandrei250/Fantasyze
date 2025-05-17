@@ -102,7 +102,7 @@ function submitForm() {
   if (hero.value.image) {
     formData.append('image', hero.value.image)
   }
-  createHero(formData).then(() => {
+  createHero(formData).finally(() => {
     isLoading.value = false
   })
 }
