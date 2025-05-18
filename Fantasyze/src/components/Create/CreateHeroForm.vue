@@ -1,5 +1,6 @@
 <template>
   <div class="w-1/2 bg-gray-800 p-8 rounded-lg h-fit flex flex-col gap-10">
+    <Toast />
     <div class="sm:col-span-4">
       <label for="username" class="block text-sm/6 font-medium">Character name</label>
       <div class="mt-2">
@@ -79,8 +80,12 @@
 import { createHero } from '@/helpers/api/heroesApiRequests'
 import { ref } from 'vue'
 import Loader from '../Shared/Loader.vue'
+import { useToast } from 'primevue/usetoast'
+import Toast from 'primevue/toast'
 
 const isLoading = ref<boolean>(false)
+const toast = useToast()
+
 const hero = ref({
   name: '',
   description: '',
@@ -102,8 +107,24 @@ function submitForm() {
   if (hero.value.image) {
     formData.append('image', hero.value.image)
   }
-  createHero(formData).finally(() => {
-    isLoading.value = false
-  })
+
+  createHero(formData)
+    .then(() => {
+      toast.add({
+        severity: 'success',
+        detail: 'Character created successfully',
+        life: 3000,
+      })
+    })
+    .catch((error) => {
+      toast.add({
+        severity: 'error',
+        detail: error,
+        life: 3000,
+      })
+    })
+    .finally(() => {
+      isLoading.value = false
+    })
 }
 </script>
