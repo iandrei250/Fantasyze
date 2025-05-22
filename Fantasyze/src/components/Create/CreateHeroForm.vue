@@ -31,7 +31,17 @@
         ></textarea>
       </div>
     </div>
-    <div class="flex justify-center w-full flex-col">
+    <div class="flex" v-if="hero.image">
+      <img :src="createObjectURL(hero.image)" alt="" />
+      <div class="w-6 h-6 px-1 cursor-pointer" @click="hero.image = null">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+          <path
+            d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div v-else class="flex justify-center w-full flex-col">
       <label for="about" class="block text-sm/6 font-medium">Character image</label>
       <label
         for="dropzone-file"
@@ -82,22 +92,17 @@ import { ref } from 'vue'
 import Loader from '../Shared/Loader.vue'
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
+import { createObjectURL } from '@/helpers/helpers'
+import type { Hero } from '@/helpers/interfaces/heroes'
 
 const isLoading = ref<boolean>(false)
 const toast = useToast()
 
-const hero = ref({
+const hero = ref<Hero>({
   name: '',
   description: '',
   image: null as File | null,
 })
-
-function handleFileUpload(event: Event) {
-  const target = event.target as HTMLInputElement
-  if (target.files && target.files.length > 0) {
-    hero.value.image = target.files[0]
-  }
-}
 
 function submitForm() {
   isLoading.value = true
