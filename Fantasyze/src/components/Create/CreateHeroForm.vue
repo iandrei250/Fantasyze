@@ -104,6 +104,13 @@ const hero = ref<Hero>({
   image: null as File | null,
 })
 
+function handleFileUpload(event: Event) {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files.length > 0) {
+    hero.value.image = target.files[0]
+  }
+}
+
 function submitForm() {
   isLoading.value = true
   const formData = new FormData()
