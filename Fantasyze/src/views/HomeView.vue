@@ -28,5 +28,7 @@ onMounted(async () => {
       {{ landingPageSubText }}
     </h3>
   </div>
-  <LandingList :heroes="heroes" />
+  <div class="container p-8 flex items-center justify-center">
+    <LandingList :heroes="heroes" />
+  </div>
 </template>
