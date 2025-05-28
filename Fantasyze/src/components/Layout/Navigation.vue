@@ -29,6 +29,10 @@ import { RouterLink } from 'vue-router'
             {{ createHeroButtonText }}
           </RouterLink>
         </Button>
+
+        <Button v-else class="margin-auto border-2 border-solid p-2 rounded-xl bg-white text-black">
+          <RouterLink to="/"> Go Back </RouterLink>
+        </Button>
       </div>
     </div>
   </nav>
