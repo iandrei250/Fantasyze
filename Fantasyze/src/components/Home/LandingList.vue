@@ -1,5 +1,5 @@
 <template>
-  <div class="py-2" v-for="hero in heroes">
+  <div class="p-4" v-for="hero in heroes">
     <HeroCard :key="hero.id" :hero="hero" />
   </div>
 </template>

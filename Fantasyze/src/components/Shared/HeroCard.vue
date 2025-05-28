@@ -1,9 +1,19 @@
 <template>
-  <div :key="hero.id" class="w-full p-8 relative">
-    <div class="absolute w-3xs h-30">
-      <h1 class="top-50% left-50%">{{ hero.name }}</h1>
-      <p>{{ hero.description }}</p>
-      <img v-if="hero.image" :src="`data:image/png;base64,${hero.image}`" alt="" />
+  <div
+    class="w-[220px] bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+  >
+    <img
+      class="rounded-t-lg w-full h-[250px]"
+      :src="`data:image/png;base64,${hero.image}`"
+      alt="hero-image"
+    />
+
+    <div class="p-5">
+      <a href="#">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          {{ hero.name }}
+        </h5>
+      </a>
     </div>
   </div>
 </template>
