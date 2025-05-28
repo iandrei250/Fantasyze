@@ -3,7 +3,7 @@
     class="w-[220px] bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
   >
     <img
-      class="rounded-t-lg w-full h-[250px]"
+      class="rounded-t-lg w-full h-[250px] object-cover"
       :src="`data:image/png;base64,${hero.image}`"
       alt="hero-image"
     />
